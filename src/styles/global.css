@@ -1,0 +1,81 @@
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #fff;
+  background: #0d0d0f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+  --accent: #7451f7;
+  --muted: #9ca3af;
+  --border: rgba(255, 255, 255, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #a790ff;
+  outline-offset: 4px;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+p,
+h1,
+h2 {
+  margin: 0;
+}
+
+img {
+  display: block;
+  flex-shrink: 0;
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+}
+
+.badges span {
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.13);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 13px;
+  color: #e5e7eb;
+}
+
+.primary-button {
+  border-radius: 6px;
+  background: var(--accent);
+  padding: 12px 28px;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 700;
+}
+
+a.primary-button {
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+}

@@ -1,0 +1,26 @@
+.favorite-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.favorite-button[aria-pressed='true'] {
+  background: var(--accent);
+}
+
+.favorite-button[aria-pressed='true'] img {
+  filter: brightness(0) invert(1);
+}
+
+.hero-favorite {
+  position: static;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  background: rgba(255, 255, 255, 0.1);
+}

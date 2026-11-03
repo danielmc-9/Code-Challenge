@@ -1,0 +1,40 @@
+.navbar {
+  height: 64px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar a {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.navbar a[aria-current] {
+  color: white;
+  font-weight: 600;
+}
+
+@media (max-width: 650px) {
+  .navbar {
+    padding: 0 20px;
+  }
+  .navbar nav {
+    gap: 24px;
+  }
+  .navbar a {
+    font-size: 12px;
+  }
+}
+
+.navbar a {
+  text-decoration: none;
+}
