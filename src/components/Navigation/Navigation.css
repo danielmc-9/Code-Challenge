@@ -1,9 +1,13 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   height: 64px;
   padding: 0 40px;
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(8, 8, 10, 0.80);
+  backdrop-filter: blur(12px);
 }
 
 .navbar nav {

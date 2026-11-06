@@ -1,50 +1,56 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-
 const LibraryContext = createContext(null)
+const storageKey = 'wexo-favorites-v2'
 
 export function LibraryProvider({ children }) {
-  const [selectedTitle, setSelectedTitle] = useState(null)
   const [favorites, setFavorites] = useState(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem('wexo-favorites') || '[]')
+      const saved = JSON.parse(localStorage.getItem(storageKey) || '[]')
       return Array.isArray(saved)
-        ? saved.filter((id) => typeof id === 'string')
+        ? saved.filter(
+            (item) =>
+              item &&
+              ['movie', 'tv'].includes(item.mediaType) &&
+              Number.isInteger(item.id) &&
+              item.key === `${item.mediaType}:${item.id}` &&
+              typeof item.title === 'string'
+          )
         : []
     } catch {
       return []
     }
   })
-
   useEffect(() => {
     try {
-      localStorage.setItem('wexo-favorites', JSON.stringify(favorites))
+      localStorage.setItem(storageKey, JSON.stringify(favorites))
     } catch {
-      /* Keep favorites in memory if storage is unavailable. */
+      /* Favorites remain available in memory when storage is unavailable. */
     }
   }, [favorites])
-
-  function toggleFavorite(id) {
+  function toggleFavorite(title) {
     setFavorites((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id]
+      current.some((item) => item.key === title.key)
+        ? current.filter((item) => item.key !== title.key)
+        : [
+            ...current,
+            {
+              id: title.id,
+              key: title.key,
+              mediaType: title.mediaType,
+              title: title.title,
+              year: title.year,
+              posterPath: title.posterPath,
+              genreIds: title.genreIds,
+            },
+          ]
     )
   }
-
   return (
-    <LibraryContext.Provider
-      value={{
-        favorites,
-        toggleFavorite,
-        selectedTitle,
-        openTitle: setSelectedTitle,
-      }}
-    >
+    <LibraryContext.Provider value={{ favorites, toggleFavorite }}>
       {children}
     </LibraryContext.Provider>
   )
 }
-
 export function useLibrary() {
   const context = useContext(LibraryContext)
   if (!context)

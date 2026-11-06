@@ -1,18 +1,19 @@
-import Icon from '../Icon/Icon.jsx'
 import { useLibrary } from '../../context/LibraryContext.jsx'
 import './FavoriteButton.css'
-
 export default function FavoriteButton({ movie, hero = false }) {
-  const { favorites, toggleFavorite: toggle } = useLibrary()
-  const saved = favorites.includes(movie.id)
+  const { favorites, toggleFavorite } = useLibrary()
+  const saved = favorites.some((item) => item.key === movie.key)
   return (
     <button
       className={`favorite-button ${hero ? 'hero-favorite' : ''}`}
       aria-pressed={saved}
-      aria-label={`${saved ? 'Remove' : 'Add'} ${movie.title} ${movie.id} ${saved ? 'from' : 'to'} favorites`}
-      onClick={() => toggle(movie.id)}
+      aria-label={`${saved ? 'Remove' : 'Add'} ${movie.title} ${saved ? 'from' : 'to'} favorites`}
+      onClick={() => toggleFavorite(movie)}
     >
-      <Icon name="heart" />
+      <svg className="heart-icon" viewBox="0 0 14 14" aria-hidden="true">
+        <use className="heart-fill" href="/assets/heart.svg#heart" />
+        <use className="heart-outline" href="/assets/heart.svg#heart" />
+      </svg>
     </button>
   )
 }

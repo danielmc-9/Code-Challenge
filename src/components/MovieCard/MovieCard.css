@@ -1,5 +1,6 @@
 .movie-card {
   flex: 0 0 160px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -36,4 +37,34 @@
   line-height: 13px;
   color: #374151;
   white-space: nowrap;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.poster {
+  overflow: hidden;
+}
+.movie-title {
+  color: #e5e7eb;
+  text-decoration: none;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.movie-meta {
+  color: #9ca3af;
+}
+
+/* Keep intrinsic poster dimensions from expanding their grid tracks. */
+.cover-image {
+  position: absolute;
+  inset: 0;
+}
+.poster-open {
+  position: relative;
 }

@@ -1,26 +1,54 @@
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Icon from '../Icon/Icon.jsx'
 import FavoriteButton from '../FavoriteButton/FavoriteButton.jsx'
-import { useLibrary } from '../../context/LibraryContext.jsx'
+import { imageUrl, titleUrl } from '../../lib/api.js'
 import './MovieCard.css'
-
+export function PosterImage({ title, className = '', eager = false }) {
+  const [failed, setFailed] = useState(false)
+  const src = imageUrl(title.posterPath)
+  return src && !failed ? (
+    <img
+      className={`cover-image ${className}`}
+      src={src}
+      alt={`${title.title} poster`}
+      loading={eager ? 'eager' : 'lazy'}
+      onError={() => setFailed(true)}
+    />
+  ) : (
+    <Icon name="film" />
+  )
+}
 export default function MovieCard({ movie }) {
-  const { openTitle: onOpen } = useLibrary()
+  const location = useLocation()
+  const returnState = {
+    returnTo: location.pathname + location.search + location.hash,
+  }
   return (
     <article className="movie-card">
       <div className="poster">
-        <button
+        <Link
           className="poster-open"
-          aria-label={`Read more about ${movie.title} ${movie.id}`}
-          onClick={() => onOpen(movie)}
+          to={titleUrl(movie)}
+          state={returnState}
+          aria-label={`Read more about ${movie.title}`}
         >
-          <Icon name="film" />
-        </button>
-        <FavoriteButton movie={movie} />
+          <PosterImage title={movie} />
+        </Link>
+        {/* <FavoriteButton movie={movie} /> */}
       </div>
-      <button className="movie-title" onClick={() => onOpen(movie)}>
+      <Link
+        className="movie-title"
+        to={titleUrl(movie)}
+        state={returnState}
+        title={movie.title}
+      >
         {movie.title}
-      </button>
-      <p className="movie-meta">Movie · Year · Genre</p>
+      </Link>
+      <p className="movie-meta">
+        {movie.mediaType === 'tv' ? 'Series' : 'Movie'} ·{' '}
+        {movie.year || 'Year unavailable'}
+      </p>
     </article>
   )
 }
