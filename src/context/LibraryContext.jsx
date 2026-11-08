@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 const LibraryContext = createContext(null)
-const storageKey = 'wexo-favorites-v2'
+const storageKey = 'my-favorites'
 
 export function LibraryProvider({ children }) {
   const [favorites, setFavorites] = useState(() => {
