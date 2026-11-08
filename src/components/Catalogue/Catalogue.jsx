@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { genres } from '../../data/genres.js'
 import useApi from '../../hooks/useApi.js'
 import RequestState from '../RequestState/RequestState.jsx'
-import Icon from '../Icon/Icon.jsx'
 import MovieCard from '../MovieCard/MovieCard.jsx'
 import './Catalogue.css'
 
@@ -27,8 +26,7 @@ function GenreRow({ genre, mediaType }) {
               className="see-all"
               to={`/genres/${genre.slug}?type=${mediaType === 'tv' ? 'tv' : 'movie'}`}
             >
-              See all
-              <Icon name="arrow-right" />
+              See all →
             </Link>
           </div>
           {data && (

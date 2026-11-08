@@ -113,7 +113,7 @@ export default function MainPage() {
                       to={titleUrl(featured)}
                       state={returnState}
                     >
-                      Read More
+                      View Details
                     </Link>
                     <FavoriteButton movie={featured} hero />
                   </div>

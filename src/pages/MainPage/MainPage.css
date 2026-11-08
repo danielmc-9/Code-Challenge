@@ -3,7 +3,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 57.6923077% 42.3076923%;
-  padding: 0 80px;
+  padding: 0 40px;
   background: linear-gradient(90deg, #0e0d13, #1f1630 70%, #110e18);
 }
 
@@ -42,7 +42,7 @@
 
 .hero-dots {
   position: absolute;
-  left: 80px;
+  left: 40px;
   top: 480px;
   width: 56px;
   height: 8px;

@@ -87,6 +87,27 @@ test('genre feed maps movie and TV genres and counts both', async () => {
   assert.deepEqual(paths, [['/3/discover/movie', '27']])
 })
 
+test('genre rows supply twenty titles for wide screens and retain mixed media', async () => {
+  const api = createTmdbApi({
+    token: 'test',
+    fetchImpl: async () => response({
+      results: Array.from({ length: 20 }, (_, index) => ({
+        ...sample,
+        id: index + 1,
+      })),
+      total_results: 100,
+    }),
+  })
+  const movies = await request(api, '/api/genre-feed?genre=action&type=movie')
+  assert.equal(movies.body.results.length, 20)
+  assert.equal(movies.body.results[19].key, 'movie:20')
+  const mixed = await request(api, '/api/genre-feed?genre=action')
+  assert.equal(mixed.body.results.length, 20)
+  assert.deepEqual(mixed.body.results.slice(0, 2).map((title) => title.key), [
+    'movie:1', 'tv:1',
+  ])
+})
+
 test('pagination is validated, forwarded, and capped', async () => {
   const api = createTmdbApi({
     token: 'test',

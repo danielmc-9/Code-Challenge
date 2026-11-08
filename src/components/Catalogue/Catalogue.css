@@ -45,7 +45,6 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  padding-left: 13px;
 }
 
 .section-title-row {
@@ -121,7 +120,6 @@
     padding: 16px var(--catalogue-gutter) 40px;
   }
   .section-heading {
-    padding-left: 0;
     gap: 8px;
   }
   .section-heading h2 {

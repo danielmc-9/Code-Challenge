@@ -14,7 +14,7 @@ export default function FavoritesPage() {
       {favorites.length ? (
         <div className="title-grid">
           {favorites.map((movie) => (
-            <MovieCard key={movie.key} movie={movie} />
+            <MovieCard key={movie.key} movie={movie} showFavorite />
           ))}
         </div>
       ) : (

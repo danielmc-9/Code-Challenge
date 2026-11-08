@@ -133,11 +133,11 @@ export function createTmdbApi({
           })
         )
         const results = []
-        for (let index = 0; index < 8; index++)
+        for (let index = 0; index < 20; index++)
           for (const feed of feeds)
             if (feed.results[index]) results.push(feed.results[index])
         result = {
-          results: results.slice(0, 8),
+          results: results.slice(0, 20),
           totalResults: feeds.reduce((sum, feed) => sum + feed.total, 0),
           counts: Object.fromEntries(
             feeds.map((feed) => [feed.mediaType, feed.total])

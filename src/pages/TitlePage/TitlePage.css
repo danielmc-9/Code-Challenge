@@ -35,6 +35,9 @@
   margin-bottom: 20px;
   overflow-wrap: anywhere;
 }
+.mobile-title-favorite {
+  display: none;
+}
 .title-info .badges {
   flex-wrap: wrap;
 }
@@ -140,10 +143,22 @@
     justify-self: center;
   }
   .title-info {
+    min-width: 0;
+  }
+  .title-heading-row {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .mobile-title-favorite {
+    display: block;
+    flex-shrink: 0;
   }
   .title-info h1 {
+    min-width: 0;
+    margin-bottom: 0;
     text-align: center;
   }
   .title-info .badges,
@@ -151,15 +166,7 @@
     justify-content: center;
   }
   .title-info .save-title {
-    order: 1;
-    justify-content: center;
-    margin: 0 0 24px;
-  }
-  .title-info .title-overview {
-    order: 2;
-  }
-  .title-info dl {
-    order: 3;
+    display: none;
   }
   .title-info dl {
     grid-template-columns: 1fr;

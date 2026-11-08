@@ -3,6 +3,7 @@ import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import useApi from '../../hooks/useApi.js'
 import { imageUrl } from '../../lib/api.js'
 import { genres } from '../../data/genres.js'
+import { useLibrary } from '../../context/LibraryContext.jsx'
 import FavoriteButton from '../../components/FavoriteButton/FavoriteButton.jsx'
 import { PosterImage } from '../../components/MovieCard/MovieCard.jsx'
 import RequestState from '../../components/RequestState/RequestState.jsx'
@@ -36,6 +37,7 @@ function CastPortrait({ person }) {
 }
 
 export default function TitlePage({ mediaType }) {
+  const { favorites } = useLibrary()
   const drag = useRef(null)
   const { id } = useParams()
   const location = useLocation()
@@ -82,7 +84,12 @@ export default function TitlePage({ mediaType }) {
           <PosterImage key={title.key} title={title} eager />
         </div>
         <div className="title-info">
-          <h1>{title.title}</h1>
+          <div className="title-heading-row">
+            <h1>{title.title}</h1>
+            <div className="mobile-title-favorite">
+              <FavoriteButton movie={title} hero />
+            </div>
+          </div>
           <div className="badges">
             <span>{title.year || 'Release year unavailable'}</span>
             <span>{mediaType === 'tv' ? 'Series' : 'Movie'}</span>
@@ -137,7 +144,11 @@ export default function TitlePage({ mediaType }) {
           </dl>
           <div className="save-title">
             <FavoriteButton movie={title} hero />
-            <span>Save to My Favorites</span>
+            <span>
+              {favorites.some((item) => item.key === title.key)
+                ? 'Remove from My Favorites'
+                : 'Add to My Favorites'}
+            </span>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export function PosterImage({ title, className = '', eager = false }) {
     <Icon name="film" />
   )
 }
-export default function MovieCard({ movie }) {
+export default function MovieCard({ movie, showFavorite = false }) {
   const location = useLocation()
   const returnState = {
     returnTo: location.pathname + location.search + location.hash,
@@ -31,11 +31,11 @@ export default function MovieCard({ movie }) {
           className="poster-open"
           to={titleUrl(movie)}
           state={returnState}
-          aria-label={`Read more about ${movie.title}`}
+          aria-label={`View details about ${movie.title}`}
         >
           <PosterImage title={movie} />
         </Link>
-        {/* <FavoriteButton movie={movie} /> */}
+        {showFavorite && <FavoriteButton movie={movie} />}
       </div>
       <Link
         className="movie-title"
